@@ -32,6 +32,15 @@ class BasicPodcastFeed(PodcastFeed):
     def items(self):
         return PodcastFile.objects.all()
 
+    def item_description(self, obj):
+        return obj.description
+
+    def item_pubdate(self, obj):
+        return obj.date
+
+    def item_guid(self, obj):
+        return u'%s:podcast:%d' % (Site.objects.get_current().domain, obj.pk)
+
     def item_enclosure_url(self, obj):
         file_url = obj.file.url
 
