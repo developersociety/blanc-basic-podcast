@@ -33,7 +33,9 @@ class iTunesFeed(Rss201rev2Feed):
 
         # iTunes explicit
         if self.feed['itunes:image'] is not None:
-            handler.addQuickElement(u'itunes:image', self.feed['itunes:image'])
+            handler.addQuickElement(u'itunes:image', '', {
+                'href': self.feed['itunes:image'],
+            })
 
         # iTunes Categories
         if self.feed['itunes:categories'] is not None:
