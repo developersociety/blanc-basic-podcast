@@ -9,7 +9,7 @@ class PodcastFile(models.Model):
     slug = models.SlugField(max_length=100, unique_for_date='date')
     date = models.DateTimeField(default=timezone.now, db_index=True)
     file = models.FileField(
-            upload_to='podcast/file',
+            upload_to='podcast/file/%Y/%m',
             validators=[validate_mp3],
             help_text='MP3 files only')
     description = models.TextField()
