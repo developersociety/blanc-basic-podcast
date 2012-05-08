@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 
 setup(
@@ -11,8 +14,8 @@ setup(
     maintainer='Alex Tomkins',
     maintainer_email='alex@hawkz.com',
     platforms=['any'],
-    requires=[
-        'hsaudiotag >= 1.1.1',
+    install_requires=[
+        'hsaudiotag>=1.1.1',
     ],
     packages=[
         'blanc_basic_podcast',
