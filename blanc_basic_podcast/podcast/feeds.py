@@ -9,7 +9,7 @@ from .models import PodcastFile
 
 class BasicPodcastFeed(PodcastFeed):
     title = getattr(settings, 'PODCAST_TITLE', 'Podcast')
-    link = reverse_lazy('blanc_basic_podcast:feed')
+    link = reverse_lazy('blanc_basic_podcast:file-list')
 
     author_name = settings.PODCAST_AUTHOR
     author_email = settings.PODCAST_EMAIL
