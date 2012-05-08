@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.sites.models import Site
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.utils import timezone
 import mimetypes
 from .itunesfeed import PodcastFeed
 from .models import PodcastFile
@@ -30,7 +31,9 @@ class BasicPodcastFeed(PodcastFeed):
         return file_url
 
     def items(self):
-        return PodcastFile.objects.all()
+        feed_limit = getattr(settings, 'PODCAST_FEED_LIMIT', 10)
+        return PodcastFile.objects.filter(published=True,
+                date__lte=timezone.now())[:feed_limit]
 
     def item_description(self, obj):
         return obj.description
