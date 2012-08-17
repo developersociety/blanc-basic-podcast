@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.utils import timezone
@@ -10,13 +10,19 @@ from .models import PodcastFile
 
 class BasicPodcastFeed(PodcastFeed):
     title = getattr(settings, 'PODCAST_TITLE', 'Podcast')
-    link = reverse_lazy('blanc_basic_podcast:file-list')
 
     author_name = settings.PODCAST_AUTHOR
     author_email = settings.PODCAST_EMAIL
 
     itunes_explicit = getattr(settings, 'PODCAST_EXPLICIT', 'no')
     itunes_categories = settings.PODCAST_CATEGORIES
+
+    def link(self):
+        if getattr(settings, 'PODCAST_PAGES', True):
+            return reverse_lazy('blanc_basic_podcast:file-list')
+        else:
+            # We assume the home page has some meaningful content
+            return '/'
 
     @property
     def itunes_image(self):
