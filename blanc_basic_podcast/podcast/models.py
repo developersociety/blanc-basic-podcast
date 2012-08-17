@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from .validators import validate_mp3
+from .validators import validate_mpeg_file
 from .utils import file_duration
 
 
@@ -10,8 +10,8 @@ class PodcastFile(models.Model):
     date = models.DateTimeField(default=timezone.now, db_index=True)
     file = models.FileField(
             upload_to='podcast/file/%Y/%m',
-            validators=[validate_mp3],
-            help_text='MP3 files only')
+            validators=[validate_mpeg_file],
+            help_text='MP3/MP4 files only')
     description = models.TextField()
     published = models.BooleanField(
             default=True,
