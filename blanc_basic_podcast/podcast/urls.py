@@ -5,7 +5,7 @@ import views
 
 urlpatterns = patterns('',
     # RSS feed
-    url(r'^feed/',
+    url(r'^feed/$',
         feeds.BasicPodcastFeed(),
         name='feed'),
 
