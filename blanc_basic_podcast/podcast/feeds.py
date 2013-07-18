@@ -62,7 +62,7 @@ class BasicPodcastFeed(PodcastFeed):
         return file_url
 
     def item_enclosure_mime_type(self, obj):
-        return mimetypes.guess_type(obj.file.path)[0]
+        return mimetypes.guess_type(obj.file.name)[0]
 
     def item_enclosure_length(self, obj):
         return obj.file.size
