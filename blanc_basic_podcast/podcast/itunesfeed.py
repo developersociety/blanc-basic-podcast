@@ -37,6 +37,10 @@ class iTunesFeed(Rss201rev2Feed):
                 'href': self.feed['itunes:image'],
             })
 
+        # iTunes description/summary
+        if self.feed['itunes:summary'] is not None:
+            handler.addQuickElement(u'itunes:summary', self.feed['itunes:summary'])
+
         # iTunes Categories
         if self.feed['itunes:categories'] is not None:
             for i in self.feed['itunes:categories']:
@@ -75,5 +79,6 @@ class PodcastFeed(Feed):
         return {
             'itunes:explicit': self.itunes_explicit,
             'itunes:categories': self.itunes_categories,
+            'itunes:summary': self.itunes_summary,
             'itunes:image': self.itunes_image,
         }

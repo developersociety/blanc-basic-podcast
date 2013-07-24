@@ -16,6 +16,7 @@ class BasicPodcastFeed(PodcastFeed):
 
     itunes_explicit = getattr(settings, 'PODCAST_EXPLICIT', 'no')
     itunes_categories = settings.PODCAST_CATEGORIES
+    itunes_summary = getattr(settings, 'PODCAST_SUMMARY', None)
 
     def link(self):
         if getattr(settings, 'PODCAST_PAGES', True):
