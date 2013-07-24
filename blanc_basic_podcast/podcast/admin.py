@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.sites.models import Site
 from .models import PodcastFile
 
 
@@ -16,8 +15,9 @@ class PodcastFileAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'published')
     list_editable = ('published',)
     list_filter = ('published', 'date')
+    search_fields = ('title',)
     prepopulated_fields = {
-       'slug': ('title',)
+        'slug': ('title',)
     }
 
 
