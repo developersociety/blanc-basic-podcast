@@ -19,7 +19,7 @@ class BasicPodcastFeed(PodcastFeed):
 
     def link(self):
         if getattr(settings, 'PODCAST_PAGES', True):
-            return reverse_lazy('blanc_basic_podcast:file-list')
+            return reverse('blanc_basic_podcast:file-list')
         else:
             # We assume the home page has some meaningful content
             return '/'
