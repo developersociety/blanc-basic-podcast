@@ -18,11 +18,11 @@ class iTunesFeed(Rss201rev2Feed):
 
             if self.feed['author_email'] is not None:
                 handler.addQuickElement(
-                        u'itunes:email', self.feed['author_email'])
+                    u'itunes:email', self.feed['author_email'])
 
             if self.feed['author_name'] is not None:
                 handler.addQuickElement(
-                        u'itunes:name', self.feed['author_name'])
+                    u'itunes:name', self.feed['author_name'])
 
             handler.endElement(u'itunes:owner')
 
@@ -34,9 +34,9 @@ class iTunesFeed(Rss201rev2Feed):
         # iTunes explicit
         if self.feed['itunes:explicit'] is not None:
             handler.addQuickElement(
-                    u'itunes:explicit', self.feed['itunes:explicit'])
+                u'itunes:explicit', self.feed['itunes:explicit'])
 
-        # iTunes explicit
+        # iTunes image
         if self.feed['itunes:image'] is not None:
             handler.addQuickElement(u'itunes:image', '', {
                 'href': self.feed['itunes:image'],
@@ -69,7 +69,7 @@ class iTunesFeed(Rss201rev2Feed):
         # File length in hours/mins/seconds
         if item['itunes:duration']:
             handler.addQuickElement(
-                    u'itunes:duration', item['itunes:duration'])
+                u'itunes:duration', item['itunes:duration'])
 
 
 class PodcastFeed(Feed):
