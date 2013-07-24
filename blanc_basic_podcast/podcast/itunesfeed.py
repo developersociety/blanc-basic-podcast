@@ -26,6 +26,11 @@ class iTunesFeed(Rss201rev2Feed):
 
             handler.endElement(u'itunes:owner')
 
+        # Need an iTunes author as well
+        if self.feed['author_name'] is not None:
+            handler.addQuickElement(
+                u'itunes:author', self.feed['author_name'])
+
         # iTunes explicit
         if self.feed['itunes:explicit'] is not None:
             handler.addQuickElement(
