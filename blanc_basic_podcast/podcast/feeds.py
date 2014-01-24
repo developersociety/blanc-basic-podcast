@@ -5,7 +5,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.utils import timezone
 import mimetypes
 from .itunesfeed import PodcastFeed
-from .models import PodcastFile
+from . import get_podcastfile_model
 
 
 class BasicPodcastFeed(PodcastFeed):
@@ -39,7 +39,7 @@ class BasicPodcastFeed(PodcastFeed):
 
     def items(self):
         feed_limit = getattr(settings, 'PODCAST_FEED_LIMIT', 10)
-        return PodcastFile.objects.filter(published=True,
+        return get_podcastfile_model().objects.filter(published=True,
                 date__lte=timezone.now())[:feed_limit]
 
     def item_description(self, obj):

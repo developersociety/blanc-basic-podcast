@@ -6,7 +6,7 @@ from .validators import validate_mpeg_file
 from .utils import file_duration
 
 
-class PodcastFile(models.Model):
+class AbstractPodcastFile(models.Model):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique_for_date='date')
     date = models.DateTimeField(default=timezone.now, db_index=True)
@@ -24,13 +24,14 @@ class PodcastFile(models.Model):
     class Meta:
         get_latest_by = 'date'
         ordering = ('-date',)
+        abstract = True
 
     def __unicode__(self):
         return self.title
 
     def save(self, *args, **kwargs):
         self.duration = file_duration(self.file)
-        super(PodcastFile, self).save(*args, **kwargs)
+        super(AbstractPodcastFile, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         if getattr(settings, 'PODCAST_PAGES', True):
@@ -52,3 +53,8 @@ class PodcastFile(models.Model):
         seconds = remaining % 60
 
         return '%d:%02d:%02d' % (hours, minutes, seconds)
+
+
+class PodcastFile(AbstractPodcastFile):
+    class Meta(AbstractPodcastFile.Meta):
+        swappable = 'PODCAST_FILE_MODEL'
