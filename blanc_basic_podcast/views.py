@@ -1,11 +1,12 @@
-from django.views.generic import ListView, DateDetailView
-from django.utils import timezone
 from django.conf import settings
-from . import get_podcastfile_model
+from django.utils import timezone
+from django.views.generic import DateDetailView, ListView
+
+from .models import PodcastFile
 
 
 class PodcastFileListView(ListView):
-    model = get_podcastfile_model()
+    model = PodcastFile
     paginate_by = getattr(settings, 'PODCAST_PER_PAGE', 10)
 
     def get_queryset(self):
@@ -14,6 +15,6 @@ class PodcastFileListView(ListView):
 
 
 class PodcastFileDetailView(DateDetailView):
-    queryset = get_podcastfile_model().objects.filter(published=True)
+    queryset = PodcastFile.objects.filter(published=True)
     month_format = '%m'
     date_field = 'date'
