@@ -32,8 +32,7 @@ class BasicPodcastFeed(PodcastFeed):
         file_url = staticfiles_storage.url(settings.PODCAST_IMAGE)
 
         # Must be a full URL
-        if not (file_url.startswith('http://')
-                or file_url.startswith('https://')):
+        if not (file_url.startswith('http://') or file_url.startswith('https://')):
             domain = Site.objects.get_current().domain
             file_url = 'http://%s%s' % (domain, file_url)
 
@@ -50,14 +49,13 @@ class BasicPodcastFeed(PodcastFeed):
         return obj.date
 
     def item_guid(self, obj):
-        return u'%s:podcast:%d' % (Site.objects.get_current().domain, obj.pk)
+        return '%s:podcast:%d' % (Site.objects.get_current().domain, obj.pk)
 
     def item_enclosure_url(self, obj):
         file_url = obj.file.url
 
         # Must be a full URL
-        if not (file_url.startswith('http://')
-                or file_url.startswith('https://')):
+        if not (file_url.startswith('http://') or file_url.startswith('https://')):
             domain = Site.objects.get_current().domain
             file_url = 'http://%s%s' % (domain, file_url)
 

@@ -4,11 +4,13 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 
 from .utils import file_duration
 from .validators import validate_mpeg_file
 
 
+@python_2_unicode_compatible
 class PodcastFile(models.Model):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique_for_date='date')
@@ -26,7 +28,7 @@ class PodcastFile(models.Model):
         get_latest_by = 'date'
         ordering = ('-date',)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):

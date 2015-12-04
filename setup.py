@@ -17,9 +17,14 @@ setup(
     maintainer='Blanc Ltd',
     maintainer_email='studio@blanc.ltd.uk',
     platforms=['any'],
-    install_requires=[
-        'hsaudiotag>=1.1.1',
-    ],
+    extras_require={
+        ':python_version == "2.7"': [
+            'hsaudiotag>=1.1.1',
+        ],
+        ':python_version >= "3.3"': [
+            'hsaudiotag3k>=1.1.3',
+        ],
+    },
     packages=find_packages(),
     classifiers=[
         'Environment :: Web Environment',
