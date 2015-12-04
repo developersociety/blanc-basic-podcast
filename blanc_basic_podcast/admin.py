@@ -1,7 +1,9 @@
 from django.contrib import admin
+
 from .models import PodcastFile
 
 
+@admin.register(PodcastFile)
 class PodcastFileAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
@@ -19,6 +21,3 @@ class PodcastFileAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('title',)
     }
-
-
-admin.site.register(PodcastFile, PodcastFileAdmin)
