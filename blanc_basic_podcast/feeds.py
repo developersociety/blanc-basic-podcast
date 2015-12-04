@@ -21,6 +21,8 @@ class BasicPodcastFeed(PodcastFeed):
     itunes_categories = settings.PODCAST_CATEGORIES
     itunes_summary = getattr(settings, 'PODCAST_SUMMARY', None)
 
+    item_guid_is_permalink = False
+
     def link(self):
         if getattr(settings, 'PODCAST_PAGES', True):
             return reverse('blanc_basic_podcast:file-list')
