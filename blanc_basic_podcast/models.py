@@ -13,6 +13,7 @@ class PodcastFile(models.Model):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique_for_date='date')
     date = models.DateTimeField(default=timezone.now, db_index=True)
+    date_url = models.DateField(db_index=True, editable=False)
     file = models.FileField(
         upload_to='podcast/file/%Y/%m', validators=[validate_mpeg_file],
         help_text='MP3/MP4 files only')
@@ -29,15 +30,16 @@ class PodcastFile(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        self.date_url = self.date.date()
         self.duration = file_duration(self.file)
         super(PodcastFile, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         if getattr(settings, 'PODCAST_PAGES', True):
             return reverse('blanc_basic_podcast:file-detail', kwargs={
-                'year': self.date.year,
-                'month': str(self.date.month).zfill(2),
-                'day': str(self.date.day).zfill(2),
+                'year': self.date_url.year,
+                'month': str(self.date_url.month).zfill(2),
+                'day': str(self.date_url.day).zfill(2),
                 'slug': self.slug,
             })
         else:

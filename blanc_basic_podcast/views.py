@@ -17,4 +17,4 @@ class PodcastFileListView(ListView):
 class PodcastFileDetailView(DateDetailView):
     queryset = PodcastFile.objects.filter(published=True)
     month_format = '%m'
-    date_field = 'date'
+    date_field = 'date_url'
