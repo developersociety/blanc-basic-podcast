@@ -58,7 +58,7 @@ class BasicPodcastFeed(PodcastFeed):
         return mimetypes.guess_type(obj.file.name)[0]
 
     def item_enclosure_length(self, obj):
-        return obj.file.size
+        return obj.file_size
 
     def item_itunes_duration(self, obj):
         return obj.time_duration

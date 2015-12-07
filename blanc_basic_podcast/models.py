@@ -19,6 +19,7 @@ class PodcastFile(models.Model):
     file = models.FileField(
         upload_to='podcast/file/%Y/%m', validators=[validate_mpeg_file],
         help_text='MP3/MP4 files only')
+    file_size = models.PositiveIntegerField(default=0, editable=False)
     description = models.TextField()
     published = models.BooleanField(
         default=True, db_index=True, help_text='File will be hidden unless this option is selected')
@@ -32,6 +33,9 @@ class PodcastFile(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        # Avoid doing file size requests constantly
+        self.file_size = self.file.size
+
         self.date_url = self.date.date()
         self.duration = file_duration(self.file)
         super(PodcastFile, self).save(*args, **kwargs)
