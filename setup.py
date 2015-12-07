@@ -10,7 +10,7 @@ with open('README.rst', 'r', 'utf-8') as f:
 
 setup(
     name='blanc-basic-podcast',
-    version='0.2',
+    version='0.3',
     description='Blanc Basic Podcast for Django',
     long_description=readme,
     url='https://github.com/blancltd/blanc-basic-podcast',
