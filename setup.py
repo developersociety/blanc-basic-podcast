@@ -14,8 +14,8 @@ setup(
     description='Blanc Basic Podcast for Django',
     long_description=readme,
     url='https://github.com/developersociety/blanc-basic-podcast',
-    maintainer='Blanc Ltd',
-    maintainer_email='studio@blanc.ltd.uk',
+    maintainer='The Developer Society',
+    maintainer_email='studio@dev.ngo',
     platforms=['any'],
     extras_require={
         ':python_version == "2.7"': [
