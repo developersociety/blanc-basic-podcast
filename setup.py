@@ -13,7 +13,7 @@ setup(
     version='0.3',
     description='Blanc Basic Podcast for Django',
     long_description=readme,
-    url='https://github.com/blancltd/blanc-basic-podcast',
+    url='https://github.com/developersociety/blanc-basic-podcast',
     maintainer='Blanc Ltd',
     maintainer_email='studio@blanc.ltd.uk',
     platforms=['any'],
